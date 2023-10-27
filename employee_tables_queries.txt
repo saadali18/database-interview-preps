@@ -1,0 +1,45 @@
+# Write a query to fetch the Name from the EmployeeInfo table in upper case and use the ALIAS name as EmpName.
+
+SELECT UPPER(EmpFname) AS EmpName FROM EmployeeInfo;
+
+# Write a query to fetch the number of employees working in the department ‘HR’.
+
+SELECT COUNT(*) FROM EmployeeInfo WHERE Department = 'HR';
+
+# Write a query to retrieve the first four characters of  Name from the EmployeeInfo table.
+
+SELECT SUBSTRING(Name, 1, 4) FROM EmployeeInfo;
+
+# Write a query to find the names of employees that begin with ‘A’
+
+SELECT * FROM EmployeeInfo WHERE Name LIKE 'A%';
+
+# Write a query to fetch top N records.
+
+SELECT * FROM EmpPosition ORDER BY Salary DESC LIMIT N;
+
+# Write a query to fetch all employees who also hold the managerial position.
+
+SELECT E.Name, P.EmpPosition
+FROM EmployeeInfo E INNER JOIN EmployeePosition P ON
+E.EmpID = P.EmpID AND P.EmpPosition IN ('Manager');
+
+# Write a query to find the Nth highest salary from the table without using TOP/limit keyword.
+
+SELECT Salary
+FROM EmployeePosition E1
+WHERE N-1 = (
+      SELECT COUNT( DISTINCT ( E2.Salary ) )
+      FROM EmployeePosition E2
+      WHERE E2.Salary >  E1.Salary );
+
+# Write a query to retrieve duplicate records from a table.
+
+SELECT EmpID, EmpFname, Department COUNT(*)
+FROM EmployeeInfo GROUP BY EmpID, EmpFname, Department
+HAVING COUNT(*) > 1;
+
+
+# Write a query to retrieve Departments who have less than 2 employees working in it.
+
+SELECT DEPARTMENT, COUNT(EmpID) as 'EmpNo' FROM EmployeeInfo GROUP BY DEPARTMENT HAVING COUNT(EmpD) < 2;
