@@ -43,3 +43,7 @@ HAVING COUNT(*) > 1;
 # Write a query to retrieve Departments who have less than 2 employees working in it.
 
 SELECT DEPARTMENT, COUNT(EmpID) as 'EmpNo' FROM EmployeeInfo GROUP BY DEPARTMENT HAVING COUNT(EmpD) < 2;
+
+# Write a query to find the count of male employees on each project.
+
+SELECT Project , COUNT(*) as "No. of Males" FROM Employeeinfo WHERE Gender = 'M' GROUP BY Project
