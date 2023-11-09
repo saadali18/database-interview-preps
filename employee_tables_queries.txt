@@ -43,3 +43,11 @@ HAVING COUNT(*) > 1;
 # Write a query to retrieve Departments who have less than 2 employees working in it.
 
 SELECT DEPARTMENT, COUNT(EmpID) as 'EmpNo' FROM EmployeeInfo GROUP BY DEPARTMENT HAVING COUNT(EmpD) < 2;
+
+# Write a query to find all female Managers.
+
+SELECT COUNT(*)
+FROM EmployeeInfo AS eInfo
+JOIN EmployeePostion AS ePos
+ON eInfo.ID = ePos.EmpId
+WHERE eInfo.Gender = 'F' AND ePos.Position = 'Manager';
